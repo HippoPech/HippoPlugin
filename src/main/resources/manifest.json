@@ -1,11 +1,11 @@
 {
-  "Group": "dev.hytalemodding",
-  "Name": "ExamplePlugin",
+  "Group": "fr.hippo",
+  "Name": "HippoPlugin",
   "Version": "1.0.0",
-  "Description": "Description of your plugin",
+  "Description": "Test Plugin yaayy",
   "Authors": [
     {
-      "Name": "Your Name",
+      "Name": "Hippo",
       "Email": "your.email@example.com",
       "Url": "https://your-website.com"
     }
@@ -16,5 +16,5 @@
   "OptionalDependencies": {},
   "DisabledByDefault": false,
   "IncludesAssetPack": false,
-  "Main": "dev.hytalemodding.ExamplePlugin"
+  "Main": "fr.hippo.HippoPlugin"
 }
