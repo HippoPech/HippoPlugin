@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>dev.hytalemodding</groupId>
+    <groupId>fr.hippo</groupId>
     <artifactId>HippoPlugin</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -13,7 +13,6 @@
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <repositories>
         <!-- Hytale release repository -->
         <repository>
@@ -33,7 +32,6 @@
             <artifactId>Server</artifactId>
             <!-- Replace with latest version, Hytale provides jars for the last five releases -->
             <version>2026.01.28-87d03be09</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
