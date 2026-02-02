@@ -2,30 +2,30 @@ package fr.hippo.commands;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.math.util.TrigMathUtil;
 import com.hypixel.hytale.math.vector.Transform;
 import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.math.vector.Vector3f;
 import com.hypixel.hytale.server.core.Message;
-import com.hypixel.hytale.server.core.command.system.AbstractCommand;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
-import com.hypixel.hytale.server.core.command.system.CommandSender;
+import com.hypixel.hytale.server.core.command.system.arguments.system.DefaultArg;
+import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.knockback.KnockbackComponent;
-import com.hypixel.hytale.server.core.modules.entity.teleport.Teleport;
-import com.hypixel.hytale.server.core.modules.interaction.interaction.config.server.combat.Knockback;
-import com.hypixel.hytale.server.core.modules.physics.component.Velocity;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
-import java.util.concurrent.CompletableFuture;
-
 public class HelloWorld extends AbstractPlayerCommand {
+
+    private final DefaultArg<Float> force;
+
     public HelloWorld(@NullableDecl String name, @NullableDecl String description) {
         super(name, description);
+        this.force = this.withDefaultArg("force", "Velocity force", ArgTypes.FLOAT, (float)50, "Default 50");
     }
 
     @Override
@@ -39,35 +39,37 @@ public class HelloWorld extends AbstractPlayerCommand {
         world.execute(() -> {
             if(player == null) return;
 
-            //Velocity velocity = store.getComponent(player.getReference(), Velocity.getComponentType());
-            //velocity.addForce(1,1,1);
+            float velocityForce = this.force.get(commandContext);
+            LOGGER.atInfo().log("Velocity force is " + velocityForce);
 
             KnockbackComponent knockback= new KnockbackComponent();
 
-            Vector3d position = playerRef.getTransform().getPosition();
+            Vector3f rotation = playerRef.getTransform().getRotation();
+            Vector3f headRotation = playerRef.getHeadRotation();
 
+            //playerRef.sendMessage(Message.raw("Position:[" + position.x + ", " + position.y + ", " + position.z + "]"));
+            //playerRef.sendMessage(Message.raw("Direction:[" + direction.x + ", " + direction.y + ", " + direction.z + "]"));
+            playerRef.sendMessage(Message.raw("Rotation:[" + rotation.x + ", " + rotation.y + ", " + rotation.z + "]"));
+            playerRef.sendMessage(Message.raw("Heard rotation:[" + headRotation.x + ", " + headRotation.y + ", " + headRotation.z + "]"));
 
-
-            //Vector3d.directionTo(position)
-
-            LOGGER.atInfo().log("Rotation: " + rotation.toString());
-
-
-
-
-
-            //Vector3d direction = playerRef.getTransform().getDirection().add();
-
-            //Vector3d direction = new Vector3d(playerRef.getTransform().getRotation());
+            //LOGGER.atInfo().log("Position: " + rotation.toString());
             //LOGGER.atInfo().log("Direction: " + direction.toString());
+            //LOGGER.atInfo().log("Rotation: " + rotation.toString());
 
-            //knockback.setVelocity(new Vector3d(2,2,2));
+            float forwardX = TrigMathUtil.cos(headRotation.getPitch());
+            float forwardY = - TrigMathUtil.sin(headRotation.getPitch());
+            float forwardZ = TrigMathUtil.cos(headRotation.getPitch())  * TrigMathUtil.cos(headRotation.getYaw());
 
-            //store.addComponent(player.getReference(), KnockbackComponent.getComponentType(), knockback);
+            Vector3d velocityDirection = new Vector3d(forwardX*velocityForce,forwardY*velocityForce,forwardZ*velocityForce);
+            LOGGER.atInfo().log("velocityDirection: " + velocityDirection.toString());
+            //velocityDirection = (new Vector3f(forwardX*force,forwardY*force,forwardZ*force));
 
-            //player.sendMessage(Message.raw("Velocity: " + velocity.toString()));
+            LOGGER.atInfo().log("velocityDirection: " + velocityDirection.toString());
 
-            //store.addComponent(player.getReference(), Velocity.getComponentType(), velocity);
+            knockback.setVelocity(velocityDirection);
+
+            store.addComponent(player.getReference(), KnockbackComponent.getComponentType(), knockback);
+
 
             /*Teleport teleport = Teleport.createForPlayer(
                     world,
