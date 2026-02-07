@@ -2,6 +2,7 @@ package fr.hippo;
 
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.logger.HytaleLogger;
+import com.hypixel.hytale.server.core.event.events.player.PlayerChatEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
@@ -12,6 +13,7 @@ import fr.hippo.commands.GetPlayerInfo;
 import fr.hippo.commands.HelloWorld;
 import fr.hippo.commands.Velocity;
 import fr.hippo.components.EnergyComponent;
+import fr.hippo.events.PlayerChat;
 import fr.hippo.events.PlayerEnterUniverseEvent;
 import fr.hippo.interactions.ArtifactPushback;
 
@@ -28,9 +30,6 @@ public class HippoPlugin extends JavaPlugin {
 
     @Override
     protected void setup() {
-        //this.getCommandRegistry().registerCommand(new ExampleCommand("example", "An example command"));
-        //this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, ExampleEvent::onPlayerReady);
-
         this.getCodecRegistry(Interaction.CODEC).register("artifact_pushback", ArtifactPushback.class, ArtifactPushback.CODEC);
         this.getCommandRegistry().registerCommand(new HelloWorld("hello", "A simple Hello World command"));
         this.getCommandRegistry().registerCommand(new Velocity("velocity", "Launch player forward, directed by their head rotation"));
@@ -42,6 +41,6 @@ public class HippoPlugin extends JavaPlugin {
                 EnergyComponent.CODEC
         );
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, PlayerEnterUniverseEvent::onPlayerConnect);
-
+        this.getEventRegistry().registerGlobal(PlayerChatEvent.class, PlayerChat::onPlayerChat);
     }
 }
