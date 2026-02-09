@@ -1,0 +1,54 @@
+{
+  "ItemLevel": 10,
+  "MaxStack": 64,
+  "Icon": "Icons/ItemsGenerated/Hb_Artifact.png",
+  "Categories": [
+    "Blocks.Rocks"
+  ],
+  "PlayerAnimationsId": "Block",
+  "Set": "Rock_Stone_Cobble",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Group": "Stone",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks",
+        "ItemId": "Hb_Artifact"
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "Textures": [
+      {
+        "Weight": 5,
+        "All": "BlockTextures/artefact32x.png"
+      }
+    ],
+    "ParticleColor": "#00f2ff",
+    "Light": {
+      "Color": "#0fe"
+    },
+    "BlockSoundSetId": "Stone",
+    "Interactions": {
+      "Use": "Test_Heal"
+    }
+  },
+  "ResourceTypes": [
+    {
+      "Id": "Rock"
+    }
+  ],
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "Stone"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "TranslationProperties": {
+    "Name": "Artefact"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "TranslationProperties": {
+    "Name": "items.hb.block.artifact.name",
+    "Description": "items.hb.block.artifact.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Hb_Artifact.png",
+  "Categories": [
+    "Blocks.Rocks",
+    "Blocks.Rocks"
+  ],
+  "PlayerAnimationsId": "Block",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Opacity": "Semitransparent",
+    "HitboxType": "Full",
+    "Flags": {
+      "IsStackable": true
+    },
+    "Gathering": {
+      "Breaking": {
+        "DropList": "Rock_Crystal_Water",
+        "GatherType": "Rocks"
+      }
+    },
+    "BlockParticleSetId": "Crystal",
+    "Textures": [
+      {
+        "Weight": 1,
+        "All": "BlockTextures/artefact32x.png"
+      }
+    ],
+    "ParticleColor": "#24c1bd",
+    "BlockSoundSetId": "Crystal",
+    "CubeShadingMode": "Fullbright",
+    "VariantRotation": "Pipe",
+    "Light": {
+      "Radius": 0,
+      "Color": "#587"
+    },
+    "RandomRotation": "YawPitchRollStep1"
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "Crystal"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "MaxStack": 64,
+  "Quality": "Common"
+}

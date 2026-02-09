@@ -1,0 +1,5 @@
+hb.block.artifact.name=Artefact
+hb.block.artifact.description=Un cube venant d'un autre jeu.
+hb.block.bedrock.name=Pierre noire
+hb.block.bedrock.description=Une matière immuable.
+hb.block.light.name=Light

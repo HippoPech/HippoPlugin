@@ -1,0 +1,76 @@
+{
+  "TranslationProperties": {
+    "Name": "items.hb.block.bedrock.name",
+    "Description": "items.hb.block.bedrock.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Hb_Bedrock.png",
+  "Categories": [
+    "Blocks.Rocks"
+  ],
+  "PlayerAnimationsId": "Block",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Opacity": "Solid",
+    "CustomModelTexture": [
+      {}
+    ],
+    "Group": "Stone",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "DropList": "Rock_Crystal_Green",
+        "GatherType": "Rocks"
+      }
+    },
+    "BlockParticleSetId": "Crystal",
+    "Textures": [
+      {
+        "Weight": 1,
+        "All": "BlockTextures/bedrock32x.png"
+      }
+    ],
+    "ParticleColor": "#23b333",
+    "BlockSoundSetId": "Crystal",
+    "CubeShadingMode": "Standard",
+    "VariantRotation": "Pipe"
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "Crystal"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Crystal_Green",
+        "Quantity": 10
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Builders",
+        "Type": "StructuralCrafting",
+        "Categories": [
+          "Decorative"
+        ]
+      }
+    ]
+  }
+}
