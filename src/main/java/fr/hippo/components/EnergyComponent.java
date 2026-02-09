@@ -16,13 +16,13 @@ public class EnergyComponent implements Component<EntityStore> {
 
     public static final BuilderCodec<EnergyComponent> CODEC =
             BuilderCodec.builder(EnergyComponent.class, EnergyComponent::new)
-                    .append(new KeyedCodec<>("amount", Codec.FLOAT),
+                    .append(new KeyedCodec<>("Amount", Codec.FLOAT),
                             (data, value) -> data.amount = value, // setter
                             data -> data.amount) // getter
                     .addValidator(Validators.nonNull())
                     .add()
 
-                    .append(new KeyedCodec<>("level", Codec.INTEGER),
+                    .append(new KeyedCodec<>("Level", Codec.INTEGER),
                             (data, value) -> data.level = value, //setter
                             data -> data.level) // getter
                     .addValidator(Validators.nonNull())
