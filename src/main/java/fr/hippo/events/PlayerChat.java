@@ -15,6 +15,7 @@ import java.util.List;
 
 public class PlayerChat {
     public static void onPlayerChat(PlayerChatEvent event) {
+        event.setCancelled(true);
         PlayerRef playerRef = event.getSender();
         Transform transform = playerRef.getTransform();
 
@@ -28,7 +29,7 @@ public class PlayerChat {
         World world = Universe.get().getWorld(playerRef.getWorldUuid());
         Collection<PlayerRef> playerRefs = world.getPlayerRefs();
 
-        HippoPlugin.LOGGER.atInfo().log("Players list in current world : " + playerRefs.toString());
+        HippoPlugin.LOGGER.atInfo().log("Players list in current world : " + playerRefs.stream().map(playerRef1 -> playerRef1.getUsername()).toArray().toString());
 
         //filter to get player in range
         playerRefs = playerRefs.stream().filter(ref -> box.containsPosition(ref.getTransform().getPosition().x,
@@ -36,7 +37,7 @@ public class PlayerChat {
                 ref.getTransform().getPosition().z)
         ).toList();
 
-        HippoPlugin.LOGGER.atInfo().log("Filtered player list in current world : " + playerRefs.toString());
+        HippoPlugin.LOGGER.atInfo().log("Filtered player list in current world : " + playerRefs.stream().map(playerRef1 -> playerRef1.getUsername()).toArray().toString());
 
 
     }
