@@ -3,6 +3,7 @@ package fr.hippo.events;
 import com.hypixel.hytale.math.shape.Box;
 import com.hypixel.hytale.math.vector.Transform;
 import com.hypixel.hytale.math.vector.Vector3d;
+import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.event.events.player.PlayerChatEvent;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class PlayerChat {
     public static void onPlayerChat(PlayerChatEvent event) {
+        String content = event.getContent();
         event.setCancelled(true);
         PlayerRef playerRef = event.getSender();
         Transform transform = playerRef.getTransform();
@@ -27,7 +29,7 @@ public class PlayerChat {
 
         //get current world & playerRef of this world
         World world = Universe.get().getWorld(playerRef.getWorldUuid());
-        Collection<PlayerRef> playerRefs = world.getPlayerRefs();
+        List<PlayerRef> playerRefs = (List<PlayerRef>) world.getPlayerRefs();
 
         HippoPlugin.LOGGER.atInfo().log("Players list in current world : " + playerRefs.stream().map(playerRef1 -> playerRef1.getUsername()).toArray().toString());
 
@@ -39,6 +41,7 @@ public class PlayerChat {
 
         HippoPlugin.LOGGER.atInfo().log("Filtered player list in current world : " + playerRefs.stream().map(playerRef1 -> playerRef1.getUsername()).toArray().toString());
 
+        event.setTargets(playerRefs);
 
     }
 }

@@ -18,11 +18,15 @@ import fr.hippo.events.PlayerEnterUniverseEvent;
 import fr.hippo.interactions.ArtifactPushback;
 
 import javax.annotation.Nonnull;
+import java.util.HashMap;
 
 public class HippoPlugin extends JavaPlugin {
 
     public static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
     private ComponentType<EntityStore, EnergyComponent> energyComponent;
+
+    private HashMap<String,ChatCanal> chatList;
+
 
     public HippoPlugin(@Nonnull JavaPluginInit init) {
         super(init);
@@ -42,5 +46,11 @@ public class HippoPlugin extends JavaPlugin {
         );
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, PlayerEnterUniverseEvent::onPlayerConnect);
         this.getEventRegistry().registerGlobal(PlayerChatEvent.class, PlayerChat::onPlayerChat);
+
+        ChatCanal defaultChat = new ChatCanal("default", "Default Chat", "Chat Used by default", "", 20, false, false, "*");
+
+        this.chatList = new HashMap<String, ChatCanal>();
+        this.chatList.put(defaultChat.getId(), defaultChat);
+
     }
 }
