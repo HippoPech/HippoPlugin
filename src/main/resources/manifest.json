@@ -5,12 +5,9 @@
     "Description": "Test Plugin yaayy",
     "Authors": [
         {
-            "Name": "Hippo",
-            "Email": "your.email@example.com",
-            "Url": "https://your-website.com"
+            "Name": "Hippopo"
         }
     ],
-    "Website": "https://your-plugin-website.com",
     "DisabledByDefault": false,
     "IncludesAssetPack": true,
     "Dependencies": {},

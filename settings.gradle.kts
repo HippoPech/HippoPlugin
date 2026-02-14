@@ -1,3 +1,5 @@
+import dev.scaffoldit.hytale.wire.HytaleManifest
+
 rootProject.name = "HippoPlugin"
 
 plugins {
@@ -17,12 +19,14 @@ hytale {
     }
 
     dependencies {
-        // Any external dependency you also want to include
+        runtimeOnly("dev.scaffoldit:devtools:0.2.+")
     }
 
     manifest {
         Group = "HippoPlugin"
         Name = "HippoPlugin"
         Main = "fr.hippo.HippoPlugin"
+        Version = "1.0.0"
+        Authors = listOf(HytaleManifest.Author("Hippopo"))
     }
 }
