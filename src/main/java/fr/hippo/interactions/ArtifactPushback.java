@@ -16,11 +16,11 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHa
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import fr.hippo.HippoPlugin;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 public class ArtifactPushback extends SimpleInstantInteraction {
 
-    public static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
     public static final BuilderCodec<ArtifactPushback> CODEC = BuilderCodec.builder(
             ArtifactPushback.class, ArtifactPushback::new, SimpleInstantInteraction.CODEC
     ).build();
@@ -31,7 +31,7 @@ public class ArtifactPushback extends SimpleInstantInteraction {
         //Check if commandBuffer not null
         if(commandBuffer == null) {
             interactionContext.getState().state = InteractionState.Failed;
-            LOGGER.atInfo().log("commandBuffer is null");
+            HippoPlugin.LOGGER.atInfo().log("commandBuffer is null");
             return;
         }
         //retrieve ref of whatever triggering interaction
@@ -50,7 +50,7 @@ public class ArtifactPushback extends SimpleInstantInteraction {
 
         if(player == null) {
             interactionContext.getState().state = InteractionState.Failed;
-            LOGGER.atInfo().log("player is null");
+            HippoPlugin.LOGGER.atInfo().log("player is null");
             return;
         }
 
