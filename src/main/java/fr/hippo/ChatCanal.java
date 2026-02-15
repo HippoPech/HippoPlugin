@@ -57,6 +57,17 @@ public class ChatCanal implements Component<EntityStore> {
         this.permission = permission;
     }
 
+    public ChatCanal(String id, String name, String description, String prefix, int distance) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.prefix = prefix;
+        this.distance = distance;
+        this.isGlobal = false;
+        this.isUniversal = false;
+        this.permission = "";
+    }
+
     public String getId() {
         return id;
     }
@@ -123,14 +134,13 @@ public class ChatCanal implements Component<EntityStore> {
 
     @NullableDecl
     @Override
-    //TODO
     public Component<EntityStore> clone() {
-        return null;
+
+        return this;
     }
 
     @NullableDecl
     @Override
-    //TODO
     public Component<EntityStore> cloneSerializable() {
         return Component.super.cloneSerializable();
     }
