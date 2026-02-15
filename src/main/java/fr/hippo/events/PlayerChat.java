@@ -1,47 +1,42 @@
 package fr.hippo.events;
 
-import com.hypixel.hytale.math.shape.Box;
 import com.hypixel.hytale.math.vector.Transform;
 import com.hypixel.hytale.math.vector.Vector3d;
-import com.hypixel.hytale.server.core.Message;
+import com.hypixel.hytale.math.vector.VectorSphereUtil;
 import com.hypixel.hytale.server.core.event.events.player.PlayerChatEvent;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
 import fr.hippo.HippoPlugin;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class PlayerChat {
     public static void onPlayerChat(PlayerChatEvent event) {
         String content = event.getContent();
-        event.setCancelled(true);
-        PlayerRef playerRef = event.getSender();
-        Transform transform = playerRef.getTransform();
+        PlayerRef senderRef = event.getSender();
+        Vector3d senderPosition = senderRef.getTransform().getPosition();
 
-        //get position bounds
-        //TODO add a way to set variable area size
-        Vector3d position1 = transform.getPosition().add(10);
-        Vector3d position2 = transform.getPosition().add(-10);
-        Box box = new Box(position1, position2);
+        int chatDistance = 20;
 
-        //get current world & playerRef of this world
-        World world = Universe.get().getWorld(playerRef.getWorldUuid());
-        List<PlayerRef> playerRefs = (List<PlayerRef>) world.getPlayerRefs();
+        //get current world & senderRef of this world
+        World world = Universe.get().getWorld(senderRef.getWorldUuid());
+        Collection<PlayerRef> playerRefs = /*(List<PlayerRef>)*/ world.getPlayerRefs();
 
-        HippoPlugin.LOGGER.atInfo().log("Players list in current world : " + playerRefs.stream().map(playerRef1 -> playerRef1.getUsername()).toArray().toString());
+        HippoPlugin.LOGGER.atInfo().log("Number of players in current world : " + playerRefs.size());
 
-        //filter to get player in range
-        playerRefs = playerRefs.stream().filter(ref -> box.containsPosition(ref.getTransform().getPosition().x,
-                ref.getTransform().getPosition().y,
-                ref.getTransform().getPosition().z)
+        //check if others players is contained in a sphere around talking player
+        playerRefs = playerRefs.stream().filter(ref -> VectorSphereUtil.isInside(
+                senderPosition.getX(),
+                senderPosition.getY(),
+                senderPosition.getZ(),
+                chatDistance,
+                ref.getTransform().getPosition())
         ).toList();
 
-        HippoPlugin.LOGGER.atInfo().log("Filtered player list in current world : " + playerRefs.stream().map(playerRef1 -> playerRef1.getUsername()).toArray().toString());
-
-        event.setTargets(playerRefs);
+        HippoPlugin.LOGGER.atInfo().log("Number of players in sphere : " + playerRefs.size());
+        event.setTargets((List<PlayerRef>) playerRefs);
 
     }
 }
